@@ -1,0 +1,29 @@
+{
+    "name": "cnc/line-scenario",
+    "description": "",
+    "authors": [
+        {
+            "name": "smilecity",
+            "email": "smilecity@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+      "linecorp/line-bot-sdk": "^7.3",
+      "prettus/l5-repository": "^2.7"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cnc\\LineScenario\\Providers\\ScenarioServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Cnc\\LineScenario\\": "src/"
+        }
+    }
+}
