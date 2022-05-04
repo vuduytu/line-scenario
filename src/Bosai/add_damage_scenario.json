@@ -183,13 +183,13 @@
       "params": {
         "actionCount": 2,
         "actions.0": {
-          "data": "CATEGORY_PHONE_RIVER_TEXT",
+          "data": "河川",
           "label": "河川",
           "text": "河川",
           "type": "postback"
         },
         "actions.1": {
-          "data": "CATEGORY_PHONE_PARK_TEXT",
+          "data": "公園",
           "label": "公園",
           "text": "公園",
           "type": "postback"
