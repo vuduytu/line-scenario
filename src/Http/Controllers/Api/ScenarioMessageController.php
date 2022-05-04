@@ -233,6 +233,9 @@ class ScenarioMessageController extends \Cnc\LineScenario\Http\Controllers\Contr
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->lastMessageId][0])->get();
                 $scenarioMessage2 = ScenarioMessageModel::where('scenario_id', $data[1])
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->lastMessageId][1])->first();
+                    ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->data][0])->get();
+                $scenarioMessage2 = ScenarioMessageModel::where('scenario_id', $data[1])
+                    ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->data][1])->first();
             } else {
                 $scenarioMessage1 = ScenarioMessageModel::where('scenario_id', $data[1])
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE[$request->lastMessageId][0])->get();
@@ -240,11 +243,16 @@ class ScenarioMessageController extends \Cnc\LineScenario\Http\Controllers\Contr
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE[$request->lastMessageId][1])->first();
             }
             $response = [];
-            if (count($scenarioMessage1)) {
-                $response[] = $this->convertDataSimulate($request->lastMessageId, $scenarioMessage1, $scenario);
-            }
+
             if (!empty($scenarioMessage2)) {
+                if (count($scenarioMessage1)) {
+                    $response[] = $this->convertDataSimulate($request->lastMessageId, $scenarioMessage1, $scenario);
+                }
                 $response[] = $scenarioMessage2;
+            } else {
+                if (count($scenarioMessage1)) {
+                    $response = $this->convertDataSimulate($request->lastMessageId, $scenarioMessage1, $scenario);
+                }
             }
 
             return response()->json([

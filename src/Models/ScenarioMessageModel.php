@@ -37,6 +37,10 @@ class ScenarioMessageModel extends BaseModel implements MustLogActions
             ['CAMERA_DETAILED_PICTURE_CONFIRM'],
             ['']
         ],
+        "DUMMY_COMPOSITE_CAMERA_ACTION_DETAILED_PICTURE_BUTTON" => [
+            ['CAMERA_DETAILED_PICTURE_CONFIRM'],
+            ['']
+        ],
         "CATEGORY_DETAILS_PARK_CAROUSEL" => [
             ['CAMERA_ACTION_DETAILED_PICTURE_BUTTON'],
             ['']
@@ -76,6 +80,10 @@ class ScenarioMessageModel extends BaseModel implements MustLogActions
         ],
         "REPORT_RESUME_CONFIRM" => [
             [''],
+            ['']
+        ],
+        "STATUS_USER_COMMENT_PARK_LIGHTING_BUTTON" => [
+            ['STATUS_USER_COMMENT_CONFIRM'],
             ['']
         ],
         "BOSAI_SHELTER_SEARCH_CONFIRM_1_1" => [
