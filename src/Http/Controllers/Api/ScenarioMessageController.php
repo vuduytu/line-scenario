@@ -232,7 +232,7 @@ class ScenarioMessageController extends \Cnc\LineScenario\Http\Controllers\Contr
                 $scenarioMessage1 = ScenarioMessageModel::where('scenario_id', $data[1])
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->lastMessageId][0])->get();
                 $scenarioMessage2 = ScenarioMessageModel::where('scenario_id', $data[1])
-                    ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->lastMessageId][1])->first();
+                    ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->lastMessageId][1])->first()
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->data][0])->get();
                 $scenarioMessage2 = ScenarioMessageModel::where('scenario_id', $data[1])
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->data][1])->first();
