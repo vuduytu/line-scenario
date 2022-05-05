@@ -207,9 +207,9 @@ class ScenarioMessageController extends \Cnc\LineScenario\Http\Controllers\Contr
             return response()->json([
                 'error' => '',
                 'event' => [
-                    'data' => ScenarioMessageModel::TALK_FLOW_MAP[$request->name],
+                    'data' => $request->name == '損傷報告' ? $request->name : ScenarioMessageModel::TALK_FLOW_MAP[$request->name],
                     'message' => $scenarioMessage,
-                    'type' => 'postback'
+                    'type' => $request->name == '損傷報告' ? 'text_message' : 'postback'
                 ],
                 'result' => 'SUCCESS'
             ]);
