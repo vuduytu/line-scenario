@@ -3,6 +3,7 @@
 namespace Cnc\LineScenario\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Cnc\LineScenario\Http\Requests\API\Admin\ScenarioMessageStoreRequest;
 use Cnc\LineScenario\Http\Requests\API\Admin\ScenarioMessageUpdateRequest;
@@ -229,13 +230,19 @@ class ScenarioMessageController extends \Cnc\LineScenario\Http\Controllers\Contr
             $scenario = $request->scenario;
             $data = explode('#', $scenario);
             if ($request->data && !in_array($request->lastMessageId, ['CATEGORY_DETAILS_PARK_CAROUSEL'])) {
+                $listDataId = implode("','", ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->data][0]);
                 $scenarioMessage1 = ScenarioMessageModel::where('scenario_id', $data[1])
-                    ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->data][0])->get();
+                    ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->data][0])
+                    ->orderByRaw(DB::raw("FIELD(dataId, '$listDataId')"))
+                    ->get();
                 $scenarioMessage2 = ScenarioMessageModel::where('scenario_id', $data[1])
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->data][1])->first();
             } else {
+                $listDataId = implode("','", ScenarioMessageModel::SIMULATE_RESPONSE[$request->lastMessageId][0]);
                 $scenarioMessage1 = ScenarioMessageModel::where('scenario_id', $data[1])
-                    ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE[$request->lastMessageId][0])->get();
+                    ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE[$request->lastMessageId][0])
+                    ->orderByRaw(DB::raw("FIELD(dataId, '$listDataId')"))
+                    ->get();
                 $scenarioMessage2 = ScenarioMessageModel::where('scenario_id', $data[1])
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE[$request->lastMessageId][1])->first();
             }
