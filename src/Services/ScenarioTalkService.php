@@ -94,7 +94,12 @@ class ScenarioTalkService
             ScenarioMessageModel::create($message);
             DB::commit();
             return $talk;
-        } catch (\Exception $exception) {
+        }
+        catch (AppServiceException $exception) {
+            DB::rollBack();
+            throw new AppServiceException($exception->getMessage(), SERVER_ERROR);
+        }
+        catch (\Exception $exception) {
             DB::rollBack();
             throw new AppServiceException(__('messages.unknown_error'), SERVER_ERROR);
         }

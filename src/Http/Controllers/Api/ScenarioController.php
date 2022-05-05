@@ -165,7 +165,7 @@ class ScenarioController extends Controller
             if ($entry->displayVersionName !== $request->get('originalVersionName')) {
                 return response()->json([
                     'result' => 'ERROR',
-                    'error_message' => '予期しないエラーが発生いたしました。',
+                    'error_message' => __('messages.unknown_error'),
                 ]);
             }
 
