@@ -230,9 +230,6 @@ class ScenarioMessageController extends \Cnc\LineScenario\Http\Controllers\Contr
             $data = explode('#', $scenario);
             if ($request->data && !in_array($request->lastMessageId, ['CATEGORY_DETAILS_PARK_CAROUSEL'])) {
                 $scenarioMessage1 = ScenarioMessageModel::where('scenario_id', $data[1])
-                    ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->lastMessageId][0])->get();
-                $scenarioMessage2 = ScenarioMessageModel::where('scenario_id', $data[1])
-                    ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->lastMessageId][1])->first()
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->data][0])->get();
                 $scenarioMessage2 = ScenarioMessageModel::where('scenario_id', $data[1])
                     ->whereIn('dataId', ScenarioMessageModel::SIMULATE_RESPONSE_DATA[$request->data][1])->first();
@@ -304,7 +301,7 @@ class ScenarioMessageController extends \Cnc\LineScenario\Http\Controllers\Contr
             case 'BOSAI_SHELTER_SEARCH_CONFIRM_4_3':
             case 'BOSAI_SHELTER_SEARCH_CONFIRM_4_4':
             case 'BOSAI_SHELTER_NOT_FOUND':
-            $data[] = [
+                $data[] = [
                     "dataId" =>  "DUMMY_BOSAI_SHELTER_CAROUSEL",
                     "dataType" => "carouselFlex",
                     "nameLBD" => "避難所テンプレート",
@@ -319,40 +316,40 @@ class ScenarioMessageController extends \Cnc\LineScenario\Http\Controllers\Contr
             case 'RAIN_TYPHOON_OUTSIDE_RISK_AREA_2':
             case 'RAIN_TYPHOON_SHELTER_NOT_FOUND':
                 $data[] = [
-                        "dataId" =>  "DUMMY_BOSAI_SHELTER_CAROUSEL",
-                        "dataType" => "carouselFlex",
-                        "nameLBD" => "避難所テンプレート",
-                        "params" => [
-                            "bubbleParam" => ["RAIN_TYPHOON_SHELTER_TEMPLATE"]
-                        ],
-                        "scenario" => $scenario,
-                    ];
+                    "dataId" =>  "DUMMY_BOSAI_SHELTER_CAROUSEL",
+                    "dataType" => "carouselFlex",
+                    "nameLBD" => "避難所テンプレート",
+                    "params" => [
+                        "bubbleParam" => ["RAIN_TYPHOON_SHELTER_TEMPLATE"]
+                    ],
+                    "scenario" => $scenario,
+                ];
                 break;
-        case 'EARTHQUAKE_WHEREABOUTS_1_AREA_1':
-        case 'EARTHQUAKE_WHEREABOUTS_1_AREA_2':
-        case 'EARTHQUAKE_WHEREABOUTS_1_AREA_3':
-        case 'EARTHQUAKE_WHEREABOUTS_1_AREA_4':
-        case 'EARTHQUAKE_WHEREABOUTS_1_AREA_5':
-        case 'EARTHQUAKE_WHEREABOUTS_1_AREA_6':
-        case 'EARTHQUAKE_WHEREABOUTS_1_AREA_7':
-        case 'EARTHQUAKE_WHEREABOUTS_2_AREA_1':
-        case 'EARTHQUAKE_WHEREABOUTS_2_AREA_2':
-        case 'EARTHQUAKE_WHEREABOUTS_2_AREA_3':
-        case 'EARTHQUAKE_WHEREABOUTS_2_AREA_4':
-        case 'EARTHQUAKE_WHEREABOUTS_2_AREA_5':
-        case 'EARTHQUAKE_WHEREABOUTS_3_AREA_1':
-        case 'EARTHQUAKE_WHEREABOUTS_3_AREA_2':
-        case 'EARTHQUAKE_WHEREABOUTS_3_AREA_3':
-        case 'EARTHQUAKE_SHELTER_NOT_FOUND':
+            case 'EARTHQUAKE_WHEREABOUTS_1_AREA_1':
+            case 'EARTHQUAKE_WHEREABOUTS_1_AREA_2':
+            case 'EARTHQUAKE_WHEREABOUTS_1_AREA_3':
+            case 'EARTHQUAKE_WHEREABOUTS_1_AREA_4':
+            case 'EARTHQUAKE_WHEREABOUTS_1_AREA_5':
+            case 'EARTHQUAKE_WHEREABOUTS_1_AREA_6':
+            case 'EARTHQUAKE_WHEREABOUTS_1_AREA_7':
+            case 'EARTHQUAKE_WHEREABOUTS_2_AREA_1':
+            case 'EARTHQUAKE_WHEREABOUTS_2_AREA_2':
+            case 'EARTHQUAKE_WHEREABOUTS_2_AREA_3':
+            case 'EARTHQUAKE_WHEREABOUTS_2_AREA_4':
+            case 'EARTHQUAKE_WHEREABOUTS_2_AREA_5':
+            case 'EARTHQUAKE_WHEREABOUTS_3_AREA_1':
+            case 'EARTHQUAKE_WHEREABOUTS_3_AREA_2':
+            case 'EARTHQUAKE_WHEREABOUTS_3_AREA_3':
+            case 'EARTHQUAKE_SHELTER_NOT_FOUND':
                 $data[] = [
-                        "dataId" =>  "DUMMY_BOSAI_SHELTER_CAROUSEL",
-                        "dataType" => "carouselFlex",
-                        "nameLBD" => "避難所テンプレート",
-                        "params" => [
-                            "bubbleParam" => ["EARTHQUAKE_SHELTER_TEMPLATE"]
-                        ],
-                        "scenario" => $scenario,
-                    ];
+                    "dataId" =>  "DUMMY_BOSAI_SHELTER_CAROUSEL",
+                    "dataType" => "carouselFlex",
+                    "nameLBD" => "避難所テンプレート",
+                    "params" => [
+                        "bubbleParam" => ["EARTHQUAKE_SHELTER_TEMPLATE"]
+                    ],
+                    "scenario" => $scenario,
+                ];
                 break;
         }
         return $data;
